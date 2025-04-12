@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tommy4Ever</title>
+    <meta name="description" content="Memorial Rugby - Tommy Flies Once More 2025. Info su squadre, calendario, iscrizioni e news.">
+    <meta property="og:title" content="Tommy Flies Once More - Memorial Rugby">
+    <meta property="og:description" content="Evento in memoria di Tommy. Info su squadre, partite, galleria e registrazioni.">
+    <meta property="og:image" content="images/preview.jpg">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- FullCalendar CSS -->
@@ -14,6 +18,9 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 </head>
 <body>
+    <header class="py-3 px-4 bg-white d-flex align-items-center">
+        <img src="images/logo_castello.jpg" alt="Rugby Castel San Pietro" style="max-height: 50px;">
+    </header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="#">Tommy4Ever</a>
@@ -44,15 +51,15 @@
 
     <div class="container mt-4">
         <section id="home" class="mb-5">
-            <h2>Benvenuti al Tommy4Ever</h2>
+            <h2>Benvenuti al 1° Memorial - Tommy Flies Once More</h2>
             <div class="row">
                 <div class="col-md-8">
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Informazioni Generali</h5>
                             <p class="card-text">
-                                Benvenuti alla pagina ufficiale del torneo di rugby. Qui potrete trovare tutte le informazioni
-                                relative alle squadre partecipanti, il calendario delle partite e la classifica aggiornata.
+                                Benvenuti alla pagina ufficiale del primo Memorial - Tommy Flies Once More 2025. Qui potrete trovare tutte le informazioni per la registrazione all'evento,
+                                alle squadre partecipanti, il calendario delle partite e molto altro.
                             </p>
                         </div>
                     </div>
@@ -60,10 +67,9 @@
                 <div class="col-md-4">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Prossimo Incontro</h5>
-                            <p class="card-text">Data: <span id="prossima-data">-</span></p>
-                            <p class="card-text">Squadre: <span id="prossime-squadre">-</span></p>
-                            <p class="card-text">Luogo: <span id="prossimo-luogo">-</span></p>
+                            <h5 class="card-title">Incontro</h5>
+                            <p class="card-text">Data: 24 Maggio 2025<span id="prossima-data">-</span></p>
+                            <p class="card-text">Luogo: Via Viara, 517, Castel San Pietro <span id="prossimo-luogo">-</span></p>
                         </div>
                     </div>
                 </div>
@@ -71,12 +77,33 @@
         </section>
 
         <section id="iscrizione" class="mb-5">
-            <h2>Iscrizione Squadra</h2>
+            <h2>Iscrizione</h2>
+            <section class="mb-5">
+                <div class="card bg-white shadow-sm mt-2">
+                    <div class="card-body">
+                        <h5 class="card-title">🎫 Iscrizione all'evento</h5>
+                        <p class="card-text">
+                            La quota di partecipazione è di <strong>20€</strong> e include:
+                        </p>
+                        <ul>
+                            <li>👕 Maglietta dell'evento (se l'iscrizione avviene entro il 3 Maggio)</li>
+                            <li>🎖️ Medaglia ricordo</li>
+                            <li>🍝 Cibo e 🍺 birra</li>
+                        </ul>
+                        <p class="card-text mt-3">
+                            Una parte della quota sarà devoluta in <strong>beneficenza alla pediatria</strong>.
+                        </p>
+                        <p class="card-text mt-3">
+                            A breve seguiranno dettagli dell'organizzazione del pomeriggio del 24 maggio 2025!!!
+                        </p>
+                    </div>
+                </div>
+            </section>            
             <div class="card">
                 <div class="card-body">
-                    <form id="form-iscrizione">
+                    <form id="form">
                         <div class="mb-3">
-                            <label for="nome-squadra" class="form-label">Nome Squadra</label>
+                            <label for="nome-squadra" class="form-label">Nome e Cognome</label>
                             <input type="text" class="form-control" id="nome-squadra" name="nomeSquadra" required>
                         </div>
                         <div class="mb-3">
@@ -85,7 +112,16 @@
                                 <option value="">Seleziona categoria</option>
                                 <option value="senior">Senior</option>
                                 <option value="junior">Junior</option>
-                                <option value="amatori">Amatori</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="taglia" class="form-label">Taglia</label>
+                            <select class="form-select" id="taglia" name="taglia" required>
+                                <option value="">Seleziona la taglia della maglietta</option>
+                                <option value="S">S</option>
+                                <option value="M">M</option>
+                                <option value="L">L</option>
+                                <option value="XL">XL</option>
                             </select>
                         </div>
                         <div class="mb-3">
@@ -96,7 +132,7 @@
                             <label for="telefono" class="form-label">Telefono</label>
                             <input type="tel" class="form-control" id="telefono" name="telefono" required>
                         </div>
-                        <button type="submit" class="btn btn-primary">Invia Iscrizione</button>
+                        <button type="submit" id="button" class="btn btn-primary">Invia Iscrizione</button>
                     </form>
                 </div>
             </div>
@@ -227,11 +263,47 @@
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/locales-all.min.js'></script>
     <!-- EmailJS -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        // Inizializza EmailJS
+        emailjs.init("v4hr9v0Q04whS0L3V"); // il tuo user ID
+      
+        const btn = document.getElementById('button');
+      
+        document.getElementById('form')
+          .addEventListener('submit', function(event) {
+            event.preventDefault();
+            btn.textContent = 'Invio in corso...';
+            btn.disabled = true;
+      
+            emailjs.sendForm('service_7z1pt0o', 'template_17ir3p6', this)
+              .then(() => {
+                btn.textContent = 'Invia Iscrizione';
+                btn.disabled = false;
+                alert('Iscrizione inviata con successo!');
+                this.reset();
+              }, (err) => {
+                btn.textContent = 'Invia Iscrizione';
+                btn.disabled = false;
+                alert('Errore durante l\'invio. Riprova più tardi.');
+                console.error('Errore EmailJS:', err);
+              });
+          });
+      </script>      
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <!-- Custom JS -->
     <script src="js/main.js"></script>
     <!-- Debug Utility (aggiunge ?debug=true all'URL per attivare) -->
     <script src="js/reset.js"></script>
+    <script>
+        document.querySelectorAll('a.nav-link').forEach(link => {
+          link.addEventListener('click', function (e) {
+            if (this.hash) {
+              e.preventDefault();
+              document.querySelector(this.hash).scrollIntoView({ behavior: 'smooth' });
+            }
+          });
+        });
+      </script>
 </body>
 </html> 

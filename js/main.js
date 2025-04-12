@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Inizializzazione EmailJS
     try {
-        emailjs.init("_tgxLcltA1eWDBu-W");
+        emailjs.init("v4hr9v0Q04whS0L3V");
         console.log('EmailJS inizializzato con successo');
     } catch (error) {
         console.error('Errore durante l\'inizializzazione di EmailJS:', error);
@@ -160,8 +160,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     telefono: document.getElementById('telefono').value
                 };
                 console.log('Dati del form raccolti:', formData);
-    
-                // Prepara i dati per l'email
+            
+                // Prepara la data
                 const now = new Date();
                 const dateStr = now.toLocaleDateString('it-IT', {
                     year: 'numeric',
@@ -170,40 +170,52 @@ document.addEventListener('DOMContentLoaded', function() {
                     hour: '2-digit',
                     minute: '2-digit'
                 });
-                console.log('Data formattata:', dateStr);
-    
+            
+                // Parametri per l'organizzazione
                 const templateParams = {
-                    to_email: 'muylolito1999@gmail.com',
+                    to_email: 'mamorialtommy4ever@gmail.com',
                     nomeSquadra: formData.nomeSquadra,
                     categoria: formData.categoria,
                     email: formData.email,
                     telefono: formData.telefono,
                     date: dateStr
                 };
-                console.log('Parametri template preparati:', templateParams);
-    
-                // Invia l'email usando il tuo servizio e template
-                console.log('Tentativo di invio email con service_4zm2m4t e template_slk1ikr...');
-                const response = await emailjs.send('service_4zm2m4t', 'template_slk1ikr', templateParams);
-                console.log('Risposta da EmailJS:', response);
-                
-                alert('Iscrizione inviata con successo!');
+            
+                // Invia all'organizzatore
+                console.log('Invio email a organizzazione...');
+                await emailjs.send('service_7z1pt0o', 'template_17ir3p6', templateParams);
+            
+                // Invia auto-reply al partecipante
+                console.log('Invio auto-reply al partecipante...');
+                await emailjs.send('service_7z1pt0o', 'template_17ir3p6', {
+                    to_email: formData.email,
+                    nomeSquadra: formData.nomeSquadra
+                });
+            
+                // Messaggio di conferma
+                const successAlert = document.createElement('div');
+                successAlert.className = 'alert alert-success mt-3';
+                successAlert.textContent = 'Iscrizione inviata con successo! Ti contatteremo presto.';
+                formIscrizione.appendChild(successAlert);
+            
+                setTimeout(() => {
+                    successAlert.remove();
+                }, 5000);
+            
                 formIscrizione.reset();
                 console.log('Form resettato dopo invio con successo');
+            
             } catch (error) {
-                console.error('Dettagli completi dell\'errore:', {
-                    message: error.message,
-                    name: error.name,
-                    stack: error.stack,
-                    error: error
-                });
-                alert('Si è verificato un errore durante l\'invio dei dati. Riprova più tardi.\nErrore: ' + error.message);
-            } finally {
-                // Ripristina il pulsante
+                console.error('Errore invio EmailJS:', error);
+                alert('Si è verificato un errore durante l\'invio. Verifica la connessione o i parametri EmailJS.');
+            }
+            
+            finally {
                 submitButton.textContent = originalText;
                 submitButton.disabled = false;
                 console.log('Pulsante di submit ripristinato');
             }
+            
         });
     }
 });

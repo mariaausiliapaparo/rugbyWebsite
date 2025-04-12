@@ -38,10 +38,13 @@ body {
 
 /* Card */
 .card {
-    border: none;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
     transition: transform 0.3s ease;
 }
+
 
 .card:hover {
     transform: translateY(-5px);
@@ -94,8 +97,11 @@ section {
 }
 
 .section-heading {
-    color: var(--primary-blue);
-    margin-bottom: 30px;
+    font-size: 1.75rem;
+    font-weight: 600;
+    border-bottom: 2px solid var(--primary-blue);
+    display: inline-block;
+    padding-bottom: 0.5rem;
 }
 
 /* Tabelle */
@@ -258,3 +264,18 @@ h1, h2, h3, h4, h5, h6 {
     height: 250px;
     object-fit: cover;
 } 
+
+.container {
+    max-width: 960px;
+}
+
+section {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+
