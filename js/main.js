@@ -173,7 +173,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
                 // Parametri per l'organizzazione
                 const templateParams = {
-                    to_email: 'mamorialtommy4ever@gmail.com',
+                    to_email: 'infomemorialtommy@gmail.com',
                     nomeSquadra: formData.nomeSquadra,
                     categoria: formData.categoria,
                     email: formData.email,
